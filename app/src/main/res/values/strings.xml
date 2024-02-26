@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Screenshots</string>
+    <string name="ok">OK</string>
+    <string name="title_alert">Alert!</string>
+    <string name="something_happened">Something happened…</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="toggle_password">Toggle password</string>
+    <string name="log_in">Log In!</string>
+</resources>
