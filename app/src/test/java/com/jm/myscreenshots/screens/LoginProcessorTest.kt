@@ -12,7 +12,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class LoginProcessorTest :BaseTest() {
+class LoginProcessorTest : BaseTest() {
 
     @InjectMockKs
     lateinit var processor: LoginProcessor

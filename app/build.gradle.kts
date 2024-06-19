@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
-    id("app.cash.paparazzi")
 }
 
 apply {
@@ -55,39 +54,59 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
 
+    testOptions {
+        packaging {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
+    }
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
-    implementation("com.google.android.material:material:1.10.0")
-    // Dependency injection
+    // Region core components
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.core:core-splashscreen:1.1.0-rc01")
+    implementation("com.google.android.material:material:1.12.0")
+    // endregion
+    // Region Dependency injection
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
-    // Life cycle handlers for view models
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    // Timber for quicker logging
+    // endregion
+    // Region Life cycle handlers for view models
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    // endregion
+    // Region Timber for quicker logging
     implementation("com.jakewharton.timber:timber:5.0.1")
-    // JetPack Compose stuff
-    implementation("androidx.compose.compiler:compiler:1.5.6")
-    implementation("androidx.activity:activity-compose:1.8.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
-    implementation("androidx.navigation:navigation-compose:2.7.5")
-    implementation("androidx.compose.material3:material3:1.1.2")
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
-
+    // endregion
+    // Region JetPack Compose
+    implementation("androidx.compose.compiler:compiler:1.5.14")
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.2")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    // endregion
+    // Region unit testing
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     testImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("app.cash.turbine:turbine:1.0.0")
     testImplementation("com.google.truth:truth:1.1.4")
+    androidTestImplementation("io.mockk:mockk-android:1.13.8")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // endregion
+    // Region JetPack Compose Instrumented Testing
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.8")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
+    // endregion
 }
 
 kapt {
